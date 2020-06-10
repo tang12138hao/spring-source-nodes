@@ -141,7 +141,9 @@ abstract class ConfigurationClassUtils {
 	 * reflection-detected bean definition; {@code false} otherwise
 	 */
 	public static boolean isConfigurationCandidate(AnnotationMetadata metadata) {
-		return (isFullConfigurationCandidate(metadata) || isLiteConfigurationCandidate(metadata));
+		return (isFullConfigurationCandidate(metadata) ||
+				// 判断是否具有 @Component @ComponentScan @Import @ImportResource @Bean 注解
+				isLiteConfigurationCandidate(metadata));
 	}
 
 	/**

@@ -111,6 +111,8 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 			this.pointcut = this.declaredPointcut;
 			this.lazy = false;
 			//这个方法重点看看，创建advice对象
+			//在创建advice对象前，会将 一个增强方法和一个切点 封装成 AspectJAnnotation对象
+			//在创建advice对象时，会将 AspectjAnnotation对象按照注解类型的不同封装成不同 MethodInterceptor接口对象
 			this.instantiatedAdvice = instantiateAdvice(this.declaredPointcut);
 		}
 	}

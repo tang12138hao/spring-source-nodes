@@ -70,6 +70,9 @@ public class AutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 				candidateFound = true;
 				if (mode == AdviceMode.PROXY) {
 					//注册事务AOP的入口类InfrastructureAdvisorAutoProxyCreator,实际上这个AOP入口类起不了作用
+					// 起不了作用的原因是  AnnotationAwareAspectJAutoProxyCreator(@EnableAspectJAutoProxy启用切面注解方式的入口类，优先级最高)
+					// 和 AspectJAwareAdvisorAutoProxyCreator（XML解析方式的切面入口类，优先级次一等）
+					// 这两个切面入口类优先级都比 InfrastructureAdvisorAutoProxyCreator 高
 					AopConfigUtils.registerAutoProxyCreatorIfNecessary(registry);
 					if ((Boolean) proxyTargetClass) {
 						AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);

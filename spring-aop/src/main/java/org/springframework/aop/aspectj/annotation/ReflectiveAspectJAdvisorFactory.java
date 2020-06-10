@@ -211,6 +211,8 @@ public class ReflectiveAspectJAdvisorFactory extends AbstractAspectJAdvisorFacto
 
 		//创建Advisor切面类，这才是真正的切面类，一个切面类里面肯定要有1、pointCut 2、advice
 		//这里pointCut是expressionPointcut， advice 增强方法是 candidateAdviceMethod
+		//在创建advice对象前，会将 一个增强方法和一个切点 封装成 AspectJAnnotation对象
+		//在创建advice对象时，会将 AspectjAnnotation对象按照注解类型的不同封装成不同 MethodInterceptor接口对象
 		return new InstantiationModelAwarePointcutAdvisorImpl(expressionPointcut, candidateAdviceMethod,
 				this, aspectInstanceFactory, declarationOrderInAspect, aspectName);
 	}
